@@ -52,7 +52,7 @@ Ext.define('JAM.controller.MainContainer', {
 
     onContainerDragend: function(draggable, e, eOpts) {
         var view = this.getMainContainer();
-        var velocity  = Math.abs(e.deltaX / e.deltaTime),
+        var velocity  = Math.abs(e.deltaX / (e.timeStamp - e.startTime)),
             direction = (e.deltaX > 0) ? "right" : "left",
             offset    = Ext.clone(draggable.offset),
             threshold = parseInt(view.config.menuPlaceholder.width * 0.7);
@@ -67,7 +67,7 @@ Ext.define('JAM.controller.MainContainer', {
                     break;
             }
 
-            this.moveContainer(offset.x);
+            this.moveContainer(offset.x,100);
          } else {
             return false;
          }
